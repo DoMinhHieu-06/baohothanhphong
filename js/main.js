@@ -375,7 +375,7 @@ function updateLightbox() {
 
 // Điều hướng Trải/Phải
 //prevBtn.onclick = () => { currentIndex = (currentIndex - 1 + currentAlbum.length) % currentAlbum.length; updateLightbox(); };
-nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % currentAlbum.length; updateLightbox(); };
+//nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % currentAlbum.length; updateLightbox(); };
 
 // Đóng Lightbox
 const close = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
