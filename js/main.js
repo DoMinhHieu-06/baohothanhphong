@@ -332,12 +332,12 @@ function initProductGalleryLightbox() {
                 document.getElementById('lt-title').innerText = data.title;
                 document.getElementById('lt-price').innerText = data.price;
                 document.getElementById('lt-desc').innerText = data.desc;
-                
+
                 // Cập nhật ảnh (Dùng lại logic album cũ của bạn)
                 currentAlbum = data.imgs;
                 currentIndex = 0;
                 updateLightbox();
-                
+
                 lightbox.classList.add('open');
                 document.body.style.overflow = 'hidden';
             }
@@ -345,42 +345,42 @@ function initProductGalleryLightbox() {
     });
 }
 
-    // Mở Lightbox khi bấm vào ảnh
-    document.querySelectorAll('.product-gallery-trigger').forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const albumId = trigger.getAttribute('data-album-id');
-            currentAlbum = productAlbums[albumId] || [trigger.getAttribute('href')];
-            currentIndex = 0;
-            updateLightbox();
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
+// Mở Lightbox khi bấm vào ảnh
+document.querySelectorAll('.product-gallery-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const albumId = trigger.getAttribute('data-album-id');
+        currentAlbum = productAlbums[albumId] || [trigger.getAttribute('href')];
+        currentIndex = 0;
+        updateLightbox();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
     });
+});
 
-    // Cập nhật nội dung ảnh và danh sách ảnh nhỏ
-    function updateLightbox() {
-        if (currentAlbum.length === 0) return;
-        mainImg.src = currentAlbum[currentIndex];
-        
-        thumbsContainer.innerHTML = '';
-        currentAlbum.forEach((imgSrc, index) => {
-            const thumb = document.createElement('div');
-            thumb.className = `thumb-item ${index === currentIndex ? 'active' : ''}`;
-            thumb.innerHTML = `<img src="${imgSrc}">`;
-            thumb.onclick = () => { currentIndex = index; updateLightbox(); };
-            thumbsContainer.appendChild(thumb);
-        });
-    }
+// Cập nhật nội dung ảnh và danh sách ảnh nhỏ
+function updateLightbox() {
+    if (currentAlbum.length === 0) return;
+    mainImg.src = currentAlbum[currentIndex];
 
-    // Điều hướng Trải/Phải
-    prevBtn.onclick = () => { currentIndex = (currentIndex - 1 + currentAlbum.length) % currentAlbum.length; updateLightbox(); };
-    nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % currentAlbum.length; updateLightbox(); };
+    thumbsContainer.innerHTML = '';
+    currentAlbum.forEach((imgSrc, index) => {
+        const thumb = document.createElement('div');
+        thumb.className = `thumb-item ${index === currentIndex ? 'active' : ''}`;
+        thumb.innerHTML = `<img src="${imgSrc}">`;
+        thumb.onclick = () => { currentIndex = index; updateLightbox(); };
+        thumbsContainer.appendChild(thumb);
+    });
+}
 
-    // Đóng Lightbox
-    const close = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
-    closeBtn.onclick = close;
-    overlay.onclick = close;
+// Điều hướng Trải/Phải
+//prevBtn.onclick = () => { currentIndex = (currentIndex - 1 + currentAlbum.length) % currentAlbum.length; updateLightbox(); };
+nextBtn.onclick = () => { currentIndex = (currentIndex + 1) % currentAlbum.length; updateLightbox(); };
+
+// Đóng Lightbox
+const close = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+closeBtn.onclick = close;
+overlay.onclick = close;
 // 2. Hàm xử lý số lượng
 function changeQty(amt) {
     const qtyInput = document.getElementById('lt-qty');
