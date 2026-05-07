@@ -379,7 +379,7 @@ function updateLightbox() {
 
 // Đóng Lightbox
 const close = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
-closeBtn.onclick = close;
+//closeBtn.onclick = close;
 overlay.onclick = close;
 // 2. Hàm xử lý số lượng
 function changeQty(amt) {
